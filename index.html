@@ -4,217 +4,214 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aditya Gudal</title>
-<meta name="description" content="Aditya Gudal — research engineer in robot learning, post-training and multi-agent systems. Building the data and post-training stack behind humanoid manipulation foundation models.">
+<meta name="description" content="Aditya Gudal — research engineer in robot learning, real-to-sim and multi-agent systems. Building the data and post-training stack behind humanoid manipulation foundation models.">
 <meta property="og:title" content="Aditya Gudal">
 <meta property="og:description" content="Research engineer — robot learning, real-to-sim, multi-agent systems.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;450;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400&display=swap">
 <style>
 :root{
-  --bg:#f4f6f8; --surface:#ffffff; --surface-2:#eef1f5;
-  --ink:#131820; --strong:#0a0e14; --muted:#586274; --faint:#8a94a2;
-  --line:#e0e4ea; --line-strong:#cdd3dc;
-  --accent:#b0680f; --accent-soft:#caa15a;
-  --dot:#d98a2b;
-  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --maxw:1020px;
+  --bg:#f2ede4; --surface:#fbf8f2; --ink:#211b13; --strong:#120d07;
+  --muted:#6b6255; --faint:#9a9184; --line:#e4ded2; --line-2:#d3ccbd;
+  --accent:#b7671b; --accent-2:#2f8f89;
+  --flow-warm:#c9781f; --flow-cool:#2f938d;
+  --scrim:86%;
+  --display:"Bricolage Grotesque","Archivo",system-ui,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1000px;
 }
-:root:not([data-theme="light"]){}
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0c0f15; --surface:#12171f; --surface-2:#161c25;
-    --ink:#e7ecf3; --strong:#f4f7fb; --muted:#95a1b2; --faint:#66707e;
-    --line:#212936; --line-strong:#2c3644;
-    --accent:#e8a33d; --accent-soft:#c98f3e; --dot:#e8a33d;
+    --bg:#14110d; --surface:#1d1812; --ink:#ece4d8; --strong:#fbf6ee;
+    --muted:#a99d8c; --faint:#6f6558; --line:#2a251d; --line-2:#3a3228;
+    --accent:#f0a35a; --accent-2:#63c6bf;
+    --flow-warm:#f0a35a; --flow-cool:#63c6bf; --scrim:82%;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0c0f15; --surface:#12171f; --surface-2:#161c25;
-  --ink:#e7ecf3; --strong:#f4f7fb; --muted:#95a1b2; --faint:#66707e;
-  --line:#212936; --line-strong:#2c3644;
-  --accent:#e8a33d; --accent-soft:#c98f3e; --dot:#e8a33d;
+  --bg:#14110d; --surface:#1d1812; --ink:#ece4d8; --strong:#fbf6ee;
+  --muted:#a99d8c; --faint:#6f6558; --line:#2a251d; --line-2:#3a3228;
+  --accent:#f0a35a; --accent-2:#63c6bf;
+  --flow-warm:#f0a35a; --flow-cool:#63c6bf; --scrim:82%;
 }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0; background:var(--bg); color:var(--ink);
-  font-family:var(--body); font-size:16.5px; line-height:1.62;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-}
+body{margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--serif); font-size:18px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 
-.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(20px,5vw,44px)}
+#flow{position:fixed; inset:0; width:100%; height:100%; z-index:0; display:block}
+.site{position:relative; z-index:1}
+.reading{background:color-mix(in srgb, var(--bg) var(--scrim), transparent)}
+
+.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(22px,5vw,48px)}
 
 a{color:inherit; text-decoration:none}
-a.link{color:var(--ink); text-decoration:underline; text-decoration-color:var(--line-strong); text-underline-offset:3px; text-decoration-thickness:1.5px; transition:text-decoration-color .15s}
-a.link:hover{text-decoration-color:var(--accent)}
 
-/* ---- top bar ---- */
-.top{position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
-.top .wrap{display:flex; align-items:center; gap:18px; height:58px}
-.brand{font-family:var(--mono); font-size:13px; letter-spacing:.02em; color:var(--strong); font-weight:500}
-.brand b{color:var(--accent)}
-.top nav{margin-left:auto; display:flex; gap:22px; font-family:var(--mono); font-size:12.5px; letter-spacing:.02em}
+/* top bar */
+.top{position:sticky; top:0; z-index:30; background:color-mix(in srgb,var(--bg) 72%, transparent); backdrop-filter:saturate(1.3) blur(12px); border-bottom:1px solid color-mix(in srgb,var(--line) 70%, transparent)}
+.top .wrap{display:flex; align-items:center; gap:20px; height:60px}
+.brand{font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:-.01em; color:var(--strong)}
+.brand .d{color:var(--accent)}
+.top nav{margin-left:auto; display:flex; gap:24px; font-family:var(--mono); font-size:12.5px}
 .top nav a{color:var(--muted)} .top nav a:hover{color:var(--ink)}
-.iconbtn{font-family:var(--mono); font-size:12px; color:var(--muted); border:1px solid var(--line-strong); background:transparent; border-radius:2px; padding:5px 9px; cursor:pointer; letter-spacing:.04em}
-.iconbtn:hover{color:var(--ink); border-color:var(--accent)}
-@media (max-width:720px){ .top nav{display:none} }
+.tg{font-family:var(--mono); font-size:11.5px; color:var(--muted); background:transparent; border:1px solid var(--line-2); border-radius:100px; padding:5px 11px; cursor:pointer; letter-spacing:.03em}
+.tg:hover{color:var(--strong); border-color:var(--accent)}
+@media (max-width:720px){.top nav{display:none}}
 
-/* ---- hero ---- */
-.hero{position:relative; padding-block:clamp(56px,11vw,104px) clamp(40px,7vw,64px); border-bottom:1px solid var(--line); overflow:hidden}
-#bg{position:absolute; inset:0; width:100%; height:100%; z-index:0; opacity:.55; pointer-events:none}
-.hero .wrap{position:relative; z-index:1}
-.eyebrow{font-family:var(--mono); font-size:12.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin:0 0 20px}
-.hero h1{font-family:var(--display); font-weight:800; letter-spacing:-.02em; line-height:.98; font-size:clamp(46px,9vw,92px); margin:0; color:var(--strong); text-wrap:balance}
-.hero .lead{max-width:34em; margin:22px 0 0; font-size:clamp(17px,2.2vw,20px); line-height:1.5; color:var(--muted); text-wrap:pretty}
-.hero .lead b{color:var(--ink); font-weight:600}
-.status{font-family:var(--mono); font-size:13px; color:var(--muted); margin:26px 0 0; display:flex; align-items:center; gap:9px; flex-wrap:wrap}
-.dot{width:8px; height:8px; border-radius:50%; background:var(--dot); box-shadow:0 0 0 0 color-mix(in srgb,var(--dot) 60%,transparent); animation:pulse 2.6s ease-out infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--dot) 55%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+/* hero */
+.hero{padding-block:clamp(64px,13vw,128px) clamp(48px,8vw,80px)}
+.kicker{font-family:var(--mono); font-size:13px; letter-spacing:.04em; color:var(--accent); margin:0 0 22px; display:flex; align-items:center; gap:10px}
+.kicker .ln{width:34px; height:1px; background:var(--accent); opacity:.6}
+.hero h1{font-family:var(--display); font-weight:800; font-size:clamp(54px,11vw,116px); line-height:.9; letter-spacing:-.035em; margin:0; color:var(--strong); text-wrap:balance}
+.hero .lead{font-family:var(--serif); font-size:clamp(19px,2.6vw,25px); line-height:1.45; color:var(--ink); max-width:20ch; margin:26px 0 0; text-wrap:pretty; opacity:.92}
+.hero .lead em{font-style:italic; color:var(--accent)}
+.hero .lead b{font-weight:500; font-style:italic; color:var(--ink)}
+.status{font-family:var(--mono); font-size:13px; color:var(--muted); margin:30px 0 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 0 var(--accent); animation:pulse 2.8s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 50%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
 @media (prefers-reduced-motion: reduce){.dot{animation:none}}
+.links{display:flex; flex-wrap:wrap; align-items:center; gap:4px 22px; margin:34px 0 0; font-family:var(--mono); font-size:13px}
+.links a{color:var(--muted); padding:5px 0; border-bottom:1.5px solid transparent}
+.links a:hover{color:var(--strong); border-bottom-color:var(--accent)}
+.links a.cv{color:var(--strong); border:1px solid var(--accent); border-radius:100px; padding:7px 15px}
+.links a.cv:hover{background:var(--accent); color:var(--bg)}
 
-.links{display:flex; flex-wrap:wrap; gap:9px; margin:30px 0 0}
-.links a{font-family:var(--mono); font-size:12.5px; letter-spacing:.02em; color:var(--ink); border:1px solid var(--line-strong); border-radius:2px; padding:7px 12px; display:inline-flex; align-items:center; gap:7px; transition:border-color .15s, color .15s}
-.links a:hover{border-color:var(--accent); color:var(--strong)}
-.links a .a{color:var(--faint)}
-.links a.cv{border-color:var(--accent); color:var(--strong)}
-.links a.cv .a{color:var(--accent)}
+/* section scaffold */
+section.block{padding-block:clamp(52px,8vw,84px); border-top:1px solid var(--line)}
+.sec-h{margin:0 0 34px}
+.sec-h h2{font-family:var(--display); font-weight:700; font-size:clamp(24px,3.4vw,34px); letter-spacing:-.025em; color:var(--strong); margin:0; display:inline-block}
+.sec-h .bar{display:block; width:44px; height:3px; background:var(--accent); margin-top:12px; border-radius:2px}
 
-/* ---- sections ---- */
-section.block{padding-block:clamp(46px,7vw,72px); border-bottom:1px solid var(--line)}
-.sechead{display:flex; align-items:baseline; gap:14px; margin:0 0 30px}
-.sechead .n{font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.1em}
-.sechead h2{font-family:var(--mono); font-weight:500; text-transform:uppercase; letter-spacing:.2em; font-size:13px; color:var(--accent); margin:0}
-.sechead .rule{flex:1; height:1px; background:var(--line); align-self:center}
+.prose{max-width:60ch; font-size:19.5px; line-height:1.62; color:var(--ink)}
+.prose p{margin:0 0 18px} .prose p:last-child{margin-bottom:0}
+.prose b{font-weight:500; font-style:italic}
+.prose a{color:var(--ink); text-decoration:underline; text-decoration-color:var(--accent); text-underline-offset:3px; text-decoration-thickness:1.5px}
 
-.prose{max-width:64ch; font-size:17px; line-height:1.68; color:var(--ink)}
-.prose p{margin:0 0 16px} .prose p:last-child{margin-bottom:0}
-.prose a{color:var(--ink); text-decoration:underline; text-decoration-color:var(--accent-soft); text-underline-offset:3px}
-
-.about-grid{display:grid; grid-template-columns:1fr; gap:28px}
-
-/* row: meta rail + content */
-.entry{display:grid; grid-template-columns:186px 1fr; gap:6px 34px; padding-block:22px; border-top:1px solid var(--line)}
-.entry:first-of-type{border-top:0; padding-top:0}
-.entry .when{font-family:var(--mono); font-size:12.5px; color:var(--muted); line-height:1.5; padding-top:5px}
+/* entries: mono meta rail + serif content */
+.entry{display:grid; grid-template-columns:180px 1fr; gap:6px 36px; padding-block:26px; border-top:1px solid var(--line)}
+.entry:first-of-type{border-top:0; padding-top:2px}
+.entry .when{font-family:var(--mono); font-size:12.5px; color:var(--muted); line-height:1.6; padding-top:8px}
 .entry .when .loc{color:var(--faint); display:block; margin-top:3px}
-.entry h3{margin:0 0 3px; font-family:var(--display); font-weight:700; font-size:19px; letter-spacing:-.01em; color:var(--strong)}
+.entry h3{margin:0; font-family:var(--display); font-weight:600; font-size:21px; letter-spacing:-.015em; color:var(--strong); line-height:1.2}
 .entry h3 .org{color:var(--accent)}
-.entry p{margin:6px 0 0; color:var(--muted); font-size:15.5px; line-height:1.6; max-width:60ch}
-.tags{display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 0; padding:0; list-style:none}
-.tags li{font-family:var(--mono); font-size:11.5px; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); border-radius:2px; padding:3px 8px}
+.entry p{margin:9px 0 0; color:var(--muted); font-size:16.5px; line-height:1.55; max-width:58ch}
+.terms{font-family:var(--mono); font-size:11.5px; color:var(--faint); margin:13px 0 0; letter-spacing:.01em}
+.terms span::after{content:" · "; color:var(--line-2)}
+.terms span:last-child::after{content:""}
 
 /* publications */
-.pub{display:grid; grid-template-columns:186px 1fr; gap:6px 34px; padding-block:22px; border-top:1px solid var(--line)}
-.pub:first-of-type{border-top:0; padding-top:0}
-.pub .venue{font-family:var(--mono); font-size:12.5px; color:var(--muted); padding-top:4px}
+.pub{display:grid; grid-template-columns:180px 1fr; gap:6px 36px; padding-block:24px; border-top:1px solid var(--line)}
+.pub:first-of-type{border-top:0; padding-top:2px}
+.pub .venue{font-family:var(--mono); font-size:12.5px; color:var(--muted); padding-top:6px}
 .pub .venue .yr{color:var(--faint); display:block; margin-top:3px}
-.pub h3{margin:0; font-family:var(--display); font-weight:600; font-size:18px; line-height:1.35; color:var(--strong); letter-spacing:-.005em}
-.pub .authors{margin:8px 0 0; font-size:14.5px; color:var(--muted)} .pub .authors b{color:var(--ink); font-weight:600}
-.idlinks{display:inline-flex; gap:7px; margin-left:2px; vertical-align:middle}
-.idlinks a{font-family:var(--mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent-soft); border-radius:2px; padding:1px 6px}
-.idlinks a:hover{background:var(--accent); color:var(--surface)}
+.pub h3{margin:0; font-family:var(--display); font-weight:600; font-size:19px; line-height:1.32; color:var(--strong); letter-spacing:-.01em}
+.pub .authors{margin:9px 0 0; font-size:15.5px; color:var(--muted)} .pub .authors b{color:var(--ink); font-weight:500; font-style:italic}
+.idlink{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:100px; padding:1px 8px; margin-left:7px; white-space:nowrap; vertical-align:middle}
+.idlink:hover{background:var(--accent); color:var(--bg)}
 
 /* patents */
-.pat{display:grid; grid-template-columns:186px 1fr; gap:6px 34px; padding-block:18px; border-top:1px solid var(--line)}
-.pat:first-of-type{border-top:0; padding-top:0}
-.pat .no{font-family:var(--mono); font-size:12.5px; color:var(--accent); padding-top:2px; line-height:1.5}
-.pat .no a{color:var(--accent); text-decoration:underline; text-decoration-color:transparent; text-underline-offset:2px}
-.pat .no a:hover{text-decoration-color:var(--accent)}
+.pat{display:grid; grid-template-columns:180px 1fr; gap:6px 36px; padding-block:20px; border-top:1px solid var(--line)}
+.pat:first-of-type{border-top:0; padding-top:2px}
+.pat .no{font-family:var(--mono); font-size:12.5px; color:var(--accent); padding-top:3px; line-height:1.6}
+.pat .no a:hover{text-decoration:underline; text-underline-offset:2px}
 .pat .no .pend{color:var(--faint)}
-.pat p{margin:0; color:var(--ink); font-size:15.5px; line-height:1.5}
+.pat p{margin:0; color:var(--ink); font-size:16.5px; line-height:1.5}
 
 /* recognition */
-.rec{list-style:none; padding:0; margin:0; display:grid; gap:0}
-.rec li{display:grid; grid-template-columns:24px 1fr; gap:14px; padding-block:14px; border-top:1px solid var(--line); font-size:15.5px; color:var(--ink); align-items:start}
-.rec li:first-child{border-top:0; padding-top:0}
-.rec li .mk{font-family:var(--mono); font-size:12px; color:var(--accent); padding-top:2px}
+.rec{list-style:none; padding:0; margin:0}
+.rec li{display:grid; grid-template-columns:20px 1fr; gap:16px; padding-block:16px; border-top:1px solid var(--line); font-size:17px; color:var(--ink); align-items:start}
+.rec li:first-child{border-top:0; padding-top:2px}
+.rec li .mk{color:var(--accent); font-size:14px; padding-top:5px; font-family:var(--mono)}
 
 /* education */
-.edu{display:grid; grid-template-columns:1fr 1fr; gap:0 34px}
-.edu .entry{grid-template-columns:1fr; border-top:1px solid var(--line); padding-top:22px}
-.edu .entry .when{padding-top:0}
+.edu{display:grid; grid-template-columns:1fr 1fr; gap:30px 36px}
+.edu .card{padding-top:22px; border-top:1px solid var(--line)}
+.edu .when{font-family:var(--mono); font-size:12.5px; color:var(--muted); margin:0 0 8px}
+.edu h3{margin:0; font-family:var(--display); font-weight:600; font-size:21px; letter-spacing:-.015em; color:var(--strong)}
+.edu p{margin:6px 0 0; color:var(--muted); font-size:16.5px}
 
-footer{padding-block:38px 60px}
-footer .wrap{display:flex; flex-wrap:wrap; gap:8px 20px; align-items:center; font-family:var(--mono); font-size:12.5px; color:var(--faint)}
+footer{padding-block:44px 64px; border-top:1px solid var(--line)}
+footer .wrap{display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; font-family:var(--mono); font-size:12.5px; color:var(--faint)}
 footer a{color:var(--muted)} footer a:hover{color:var(--ink)}
 footer .sig{color:var(--accent)}
 
-:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
 
 @media (max-width:640px){
-  .entry,.pub,.pat{grid-template-columns:1fr; gap:4px}
+  .entry,.pub,.pat{grid-template-columns:1fr; gap:5px}
   .entry .when,.pub .venue,.pat .no{padding-top:0}
-  .entry .when .loc,.pub .venue .yr{display:inline; margin:0}
-  .entry .when .loc::before{content:" · "}
-  .pub .venue .yr::before{content:" · "}
-  .edu{grid-template-columns:1fr}
-  .edu .entry:first-of-type{border-top:0}
+  .entry .when .loc,.pub .venue .yr{display:inline}
+  .entry .when .loc::before,.pub .venue .yr::before{content:" · "; color:var(--line-2)}
+  .edu{grid-template-columns:1fr; gap:0}
+  .hero .lead{max-width:30ch}
 }
 </style>
 </head>
 <body>
+<canvas id="flow" aria-hidden="true"></canvas>
+<div class="site">
 
 <header class="top">
   <div class="wrap">
-    <span class="brand">aditya<b>.</b>gudal</span>
+    <span class="brand">Aditya Gudal<span class="d">.</span></span>
     <nav>
       <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#publications">Publications</a>
+      <a href="#work">Work</a>
+      <a href="#publications">Papers</a>
       <a href="#patents">Patents</a>
       <a href="#education">Education</a>
     </nav>
-    <button class="iconbtn" id="theme" type="button" aria-label="Toggle color theme">theme</button>
+    <button class="tg" id="theme" type="button" aria-label="Toggle color theme">◑ theme</button>
   </div>
 </header>
 
 <section class="hero">
-  <canvas id="bg" aria-hidden="true"></canvas>
   <div class="wrap">
-    <p class="eyebrow">Research Engineer · Robot Learning</p>
-    <h1>Aditya&nbsp;Gudal</h1>
-    <p class="lead">I build the <b>data and post-training stack</b> behind humanoid manipulation foundation models — from handheld demonstration collection to real-to-sim reconstruction and RL post-training of flow-matching policies.</p>
+    <p class="kicker"><span class="ln"></span> Research Engineer · Robot Learning</p>
+    <h1>Aditya<br>Gudal</h1>
+    <p class="lead">Teaching robots to <em>manipulate the physical world</em> — one demonstration, and its simulated twins, at a time.</p>
     <p class="status"><span class="dot" aria-hidden="true"></span> New York · Nirvana Robotics · open to research collaborations</p>
-    <div class="links">
-      <a href="mailto:adityagudal29@gmail.com"><span class="a">✉</span> Email</a>
-      <a href="https://scholar.google.com/citations?user=bu34FNAAAAAJ"><span class="a">↗</span> Scholar</a>
-      <a href="https://linkedin.com/in/aditya-gudal"><span class="a">↗</span> LinkedIn</a>
-      <a href="https://github.com/aditya9729"><span class="a">↗</span> GitHub</a>
-      <a href="https://huggingface.co/aditya9729"><span class="a">↗</span> Hugging&nbsp;Face</a>
-      <a href="https://www.nokia.com/people/aditya-gudal/"><span class="a">↗</span> Nokia</a>
-      <a class="cv" href="Aditya_Gudal_CV.pdf"><span class="a">↧</span> CV&nbsp;(PDF)</a>
-    </div>
+    <nav class="links" aria-label="Profiles">
+      <a href="mailto:adityagudal29@gmail.com">Email</a>
+      <a href="https://scholar.google.com/citations?user=bu34FNAAAAAJ">Scholar</a>
+      <a href="https://linkedin.com/in/aditya-gudal">LinkedIn</a>
+      <a href="https://github.com/aditya9729">GitHub</a>
+      <a href="https://huggingface.co/aditya9729">Hugging&nbsp;Face</a>
+      <a href="https://www.nokia.com/people/aditya-gudal/">Nokia</a>
+      <a class="cv" href="Aditya_Gudal_CV.pdf">CV ↓</a>
+    </nav>
   </div>
 </section>
 
+<div class="reading">
 <main>
 <section class="block" id="about">
   <div class="wrap">
-    <div class="sechead"><span class="n">00</span><h2>About</h2><span class="rule"></span></div>
+    <div class="sec-h"><h2>About</h2><span class="bar"></span></div>
     <div class="prose">
-      <p>I am a Member of Technical Staff at <a href="https://nrvna.ai">Nirvana Robotics</a> in New York, where I build the data and post-training stack behind a humanoid manipulation foundation model: handheld (UMI) demonstration collection, real-to-sim reconstruction of rigid, deformable and articulated objects, real-to-real data augmentation, scene-graph navigation, and RL post-training of flow-matching policies.</p>
-      <p>Before Nirvana I was a Senior Research Engineer at <b>Mbodi AI</b> — perception and manipulation for industrial pick-and-place, reaching 99.6% on a Fortune&nbsp;100 benchmark (TechCrunch Disrupt 2025 Battlefield Top&nbsp;20; Automate&nbsp;2026 Startup Challenge winner) — and a Research Engineer at <b>Nokia Bell Labs</b> working on decentralized AI infrastructure, federated learning and production multi-agent systems, with three published patent families and a peer-reviewed OFC&nbsp;2026 paper.</p>
+      <p>I am a Member of Technical Staff at <a href="https://nrvna.ai">Nirvana Robotics</a> in New York, building the data and post-training stack behind a humanoid manipulation foundation model: handheld (UMI) demonstration collection, real-to-sim reconstruction of rigid, deformable and articulated objects, real-to-real data augmentation, scene-graph navigation, and RL post-training of flow-matching policies.</p>
+      <p>Before Nirvana I was a Senior Research Engineer at <b>Mbodi AI</b> — perception and manipulation for industrial pick-and-place, reaching 99.6% on a Fortune 100 benchmark (TechCrunch Disrupt 2025 Battlefield Top 20; Automate 2026 Startup Challenge winner) — and a Research Engineer at <b>Nokia Bell Labs</b>, where I worked on decentralized AI infrastructure, federated learning and production multi-agent systems, with three published patent families and a peer-reviewed OFC 2026 paper.</p>
       <p>I hold an M.S. in Machine Learning &amp; Data Science from Northwestern University and a B.E. in Electronics Engineering from the University of Mumbai.</p>
     </div>
   </div>
 </section>
 
-<section class="block" id="experience">
+<section class="block" id="work">
   <div class="wrap">
-    <div class="sechead"><span class="n">01</span><h2>Experience</h2><span class="rule"></span></div>
+    <div class="sec-h"><h2>Work</h2><span class="bar"></span></div>
 
     <article class="entry">
       <div class="when">May 2026 — present<span class="loc">New York</span></div>
       <div>
         <h3>Member of Technical Staff, <span class="org">Nirvana Robotics</span></h3>
-        <p>Humanoid data pipeline (UMI, real2sim, real2real), pretraining architecture, scene-graph navigation and RL post-training. Second author on a forthcoming deformable-object manipulation benchmark with Georgia&nbsp;Tech.</p>
-        <ul class="tags"><li>real2sim</li><li>flow-matching policies</li><li>MCAP data pipeline</li><li>RL post-training</li></ul>
+        <p>Humanoid data pipeline (UMI, real2sim, real2real), pretraining architecture, scene-graph navigation and RL post-training. Second author on a forthcoming deformable-object manipulation benchmark with Georgia Tech.</p>
+        <p class="terms"><span>real2sim</span><span>flow-matching policies</span><span>MCAP data pipeline</span><span>RL post-training</span></p>
       </div>
     </article>
 
@@ -223,7 +220,7 @@ footer .sig{color:var(--accent)}
       <div>
         <h3>Senior Research Engineer, <span class="org">Mbodi AI</span></h3>
         <p>3D reconstruction, multi-view tracking and object permanence for pick-and-place; an LLM-agent control pipeline for OEM robots; open-sourced a typed robotics data library.</p>
-        <ul class="tags"><li>3D reconstruction</li><li>multi-view tracking</li><li>LLM agents</li></ul>
+        <p class="terms"><span>3D reconstruction</span><span>multi-view tracking</span><span>LLM agents</span></p>
       </div>
     </article>
 
@@ -232,7 +229,7 @@ footer .sig{color:var(--accent)}
       <div>
         <h3>Research Engineer, <span class="org">Nokia Bell Labs</span></h3>
         <p>Decentralized energy trading (federated transformers, SSI/HSM certification, LLM-generated smart contracts); the OurAI decentralized GPU marketplace; the Ambion post-training platform (spun out); WhizKid multi-agent systems and failure detection; EU Horizon and U.S. government-funded distributed VLM training.</p>
-        <ul class="tags"><li>federated learning</li><li>multi-agent systems</li><li>DePIN</li><li>distributed VLM training</li></ul>
+        <p class="terms"><span>federated learning</span><span>multi-agent systems</span><span>DePIN</span><span>distributed VLM training</span></p>
       </div>
     </article>
 
@@ -241,14 +238,14 @@ footer .sig{color:var(--accent)}
       <div>
         <h3>Data Scientist, <span class="org">Nokia</span></h3>
         <p>Built the first ML service and MLOps pipeline inside a flagship telecom product; statistical and RL models for UE trajectory tracking, overload control and paging fan-out.</p>
-        <ul class="tags"><li>MLOps</li><li>reinforcement learning</li><li>telecom</li></ul>
+        <p class="terms"><span>MLOps</span><span>reinforcement learning</span><span>telecom</span></p>
       </div>
     </article>
 
     <article class="entry">
       <div class="when">2018 — 2019<span class="loc">Kochi, India</span></div>
       <div>
-        <h3>Consultant, <span class="org">KRIBS-BioNest</span> (RGCB / Kerala Startup Mission)</h3>
+        <h3>Consultant, <span class="org">KRIBS-BioNest</span> — RGCB / Kerala Startup Mission</h3>
         <p>Genomics data science at a Government of India–established biotech incubator.</p>
       </div>
     </article>
@@ -257,13 +254,12 @@ footer .sig{color:var(--accent)}
 
 <section class="block" id="publications">
   <div class="wrap">
-    <div class="sechead"><span class="n">02</span><h2>Publications</h2><span class="rule"></span></div>
+    <div class="sec-h"><h2>Papers</h2><span class="bar"></span></div>
 
     <article class="pub">
       <div class="venue">OFC 2026<span class="yr">paper M3Z.15 · peer-reviewed</span></div>
       <div>
-        <h3>AI Agent-Driven Network-Aware Decentralized Compute Resource Brokering
-          <span class="idlinks"><a href="https://doi.org/10.1364/OFC.2026.M3Z.15">DOI</a></span></h3>
+        <h3>AI Agent-Driven Network-Aware Decentralized Compute Resource Brokering <a class="idlink" href="https://doi.org/10.1364/OFC.2026.M3Z.15">DOI</a></h3>
         <p class="authors">S. Bidkar, <b>A. Gudal</b>, L. Drabeck, J. Simsarian, B. Theeten, M. Khan · Optical Fiber Communication Conference</p>
       </div>
     </article>
@@ -271,8 +267,7 @@ footer .sig{color:var(--accent)}
     <article class="pub">
       <div class="venue">Preprint<span class="yr">2026</span></div>
       <div>
-        <h3>CSR-RAG: An Efficient Retrieval System for Text-to-SQL at Enterprise Scale
-          <span class="idlinks"><a href="https://arxiv.org/abs/2601.06564">arXiv</a></span></h3>
+        <h3>CSR-RAG: An Efficient Retrieval System for Text-to-SQL at Enterprise Scale <a class="idlink" href="https://arxiv.org/abs/2601.06564">arXiv</a></h3>
         <p class="authors">arXiv:2601.06564</p>
       </div>
     </article>
@@ -280,8 +275,7 @@ footer .sig{color:var(--accent)}
     <article class="pub">
       <div class="venue">Preprint<span class="yr">2025</span></div>
       <div>
-        <h3>A Ranking Framework for Network Resource Allocation and Scheduling via Hypergraphs
-          <span class="idlinks"><a href="https://arxiv.org/abs/2506.01571">arXiv</a></span></h3>
+        <h3>A Ranking Framework for Network Resource Allocation and Scheduling via Hypergraphs <a class="idlink" href="https://arxiv.org/abs/2506.01571">arXiv</a></h3>
         <p class="authors">R. Singh, N. Boškov, <b>A. Gudal</b>, M. Khan · arXiv:2506.01571</p>
       </div>
     </article>
@@ -290,7 +284,7 @@ footer .sig{color:var(--accent)}
 
 <section class="block" id="patents">
   <div class="wrap">
-    <div class="sechead"><span class="n">03</span><h2>Patents</h2><span class="rule"></span></div>
+    <div class="sec-h"><h2>Patents</h2><span class="bar"></span></div>
 
     <div class="pat">
       <div class="no"><a href="https://patents.google.com/patent/US20260093548A1">US 2026/0093548 A1</a></div>
@@ -313,7 +307,7 @@ footer .sig{color:var(--accent)}
 
 <section class="block" id="recognition">
   <div class="wrap">
-    <div class="sechead"><span class="n">04</span><h2>Recognition</h2><span class="rule"></span></div>
+    <div class="sec-h"><h2>Recognition</h2><span class="bar"></span></div>
     <ul class="rec">
       <li><span class="mk">◆</span><span>TechCrunch Disrupt 2025 Startup Battlefield — Top 20 (Mbodi AI team)</span></li>
       <li><span class="mk">◆</span><span>Automate 2026 Startup Challenge — winner (Mbodi AI team)</span></li>
@@ -325,22 +319,18 @@ footer .sig{color:var(--accent)}
 
 <section class="block" id="education">
   <div class="wrap">
-    <div class="sechead"><span class="n">05</span><h2>Education</h2><span class="rule"></span></div>
+    <div class="sec-h"><h2>Education</h2><span class="bar"></span></div>
     <div class="edu">
-      <article class="entry">
-        <div class="when">2019 — 2020</div>
-        <div>
-          <h3>Northwestern University</h3>
-          <p>M.S. Machine Learning &amp; Data Science · GPA 3.9 / 4.0</p>
-        </div>
-      </article>
-      <article class="entry">
-        <div class="when">2015 — 2019</div>
-        <div>
-          <h3>University of Mumbai · VESIT</h3>
-          <p>B.E. Electronics Engineering · GPA 4.0 / 4.0</p>
-        </div>
-      </article>
+      <div class="card">
+        <p class="when">2019 — 2020</p>
+        <h3>Northwestern University</h3>
+        <p>M.S. Machine Learning &amp; Data Science · GPA 3.9 / 4.0</p>
+      </div>
+      <div class="card">
+        <p class="when">2015 — 2019</p>
+        <h3>University of Mumbai · VESIT</h3>
+        <p>B.E. Electronics Engineering · GPA 4.0 / 4.0</p>
+      </div>
     </div>
   </div>
 </section>
@@ -356,56 +346,63 @@ footer .sig{color:var(--accent)}
     <span>New York</span>
   </div>
 </footer>
+</div><!-- /reading -->
+</div><!-- /site -->
 
 <script>
-// ---- theme toggle (persisted) ----
+/* ---------- theme toggle (persisted) ---------- */
+var root=document.documentElement;
 (function(){
-  var root=document.documentElement, btn=document.getElementById('theme');
-  try{ var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s); }catch(e){}
+  var btn=document.getElementById('theme');
+  try{var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
   btn.addEventListener('click',function(){
     var cur=root.getAttribute('data-theme');
-    var sysDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var sysDark=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;
     var next=cur?(cur==='dark'?'light':'dark'):(sysDark?'light':'dark');
     root.setAttribute('data-theme',next);
-    try{ localStorage.setItem('theme',next); }catch(e){}
+    try{localStorage.setItem('theme',next);}catch(e){}
+    if(window.__flowReset) window.__flowReset();
   });
 })();
 
-// ---- hero motif: a sparse scene-graph / trajectory field ----
+/* ---------- flow field: particles advected along an animated vector field ---------- */
 (function(){
-  var c=document.getElementById('bg'); if(!c) return;
+  var c=document.getElementById('flow'); if(!c) return;
   var ctx=c.getContext('2d'), DPR=Math.min(window.devicePixelRatio||1,2);
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var W,H,nodes,raf;
-  function accent(){ return getComputedStyle(document.documentElement).getPropertyValue('--dot').trim()||'#e8a33d'; }
-  function ink(){ return getComputedStyle(document.documentElement).getPropertyValue('--muted').trim()||'#889'; }
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W,H,parts,t=0,raf,warm,cool,bg;
+  function tok(n){return getComputedStyle(root).getPropertyValue(n).trim();}
+  function readColors(){warm=hexRGB(tok('--flow-warm'));cool=hexRGB(tok('--flow-cool'));bg=hexRGB(tok('--bg'));}
+  function hexRGB(h){h=(h||'').replace('#','');if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    return [parseInt(h.substr(0,2),16)||20,parseInt(h.substr(2,2),16)||17,parseInt(h.substr(4,2),16)||13];}
+  function rgba(c,a){return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')';}
+  function spawn(){return {x:Math.random()*W,y:Math.random()*H,life:40+Math.random()*220|0,warm:Math.random()<.5};}
+  function field(x,y){var s=0.0016;
+    return Math.PI*(Math.sin(x*s+t*0.15)+Math.cos(y*s*1.28-t*0.11)+0.6*Math.sin((x+y)*s*0.7+t*0.08));}
   function resize(){
-    var r=c.getBoundingClientRect(); W=r.width; H=r.height;
+    W=window.innerWidth; H=window.innerHeight;
     c.width=W*DPR; c.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-    var n=Math.max(14,Math.min(30,Math.round(W*H/26000)));
-    nodes=[]; for(var i=0;i<n;i++){ nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,r:Math.random()*1.6+.8,key:Math.random()<.16}); }
+    var n=Math.round(Math.min(820, W*H/2900));
+    parts=[]; for(var i=0;i<n;i++) parts.push(spawn());
+    ctx.fillStyle=rgba(bg,1); ctx.fillRect(0,0,W,H);
   }
-  function frame(){
-    ctx.clearRect(0,0,W,H);
-    var a=accent(), m=ink();
-    for(var i=0;i<nodes.length;i++){
-      var p=nodes[i];
-      for(var j=i+1;j<nodes.length;j++){
-        var q=nodes[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy);
-        if(d<140){ ctx.strokeStyle=m; ctx.globalAlpha=(1-d/140)*.14; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke(); }
-      }
+  function draw(){
+    ctx.fillStyle=rgba(bg,0.052); ctx.fillRect(0,0,W,H);
+    for(var i=0;i<parts.length;i++){
+      var p=parts[i], a=field(p.x,p.y), nx=p.x+Math.cos(a)*1.15, ny=p.y+Math.sin(a)*1.15;
+      ctx.strokeStyle=rgba(p.warm?warm:cool, 0.17);
+      ctx.lineWidth=1.1; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(nx,ny); ctx.stroke();
+      p.x=nx; p.y=ny; p.life--;
+      if(p.life<0||p.x<-4||p.x>W+4||p.y<-4||p.y>H+4){parts[i]=spawn();}
     }
-    for(var k=0;k<nodes.length;k++){
-      var n=nodes[k];
-      ctx.globalAlpha=n.key?.9:.4; ctx.fillStyle=n.key?a:m;
-      ctx.beginPath(); ctx.arc(n.x,n.y,n.key?n.r+.6:n.r,0,6.283); ctx.fill();
-      if(!reduce){ n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W)n.vx*=-1; if(n.y<0||n.y>H)n.vy*=-1; }
-    }
-    ctx.globalAlpha=1;
-    if(!reduce) raf=requestAnimationFrame(frame);
+    t+=1;
   }
-  resize(); frame();
-  window.addEventListener('resize',function(){ cancelAnimationFrame(raf); resize(); frame(); });
+  function loop(){draw(); raf=requestAnimationFrame(loop);}
+  window.__flowReset=function(){readColors(); ctx.fillStyle=rgba(bg,1); ctx.fillRect(0,0,W,H);};
+  readColors(); resize();
+  if(reduce){for(var k=0;k<90;k++) draw();}
+  else loop();
+  window.addEventListener('resize',function(){cancelAnimationFrame(raf); readColors(); resize(); if(!reduce) loop();});
 })();
 </script>
 </body>
