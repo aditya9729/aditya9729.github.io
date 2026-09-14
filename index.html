@@ -65,11 +65,19 @@ a{color:inherit; text-decoration:none}
 @media (max-width:720px){.top nav{display:none}}
 
 /* hero */
-.hero{padding-block:clamp(64px,13vw,128px) clamp(48px,8vw,80px)}
-.kicker{font-family:var(--mono); font-size:13px; letter-spacing:.04em; color:var(--accent); margin:0 0 22px; display:flex; align-items:center; gap:10px}
+.hero{padding-block:clamp(48px,9vw,96px) clamp(44px,7vw,72px)}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(226px,286px); gap:clamp(30px,5vw,60px); align-items:center}
+.hero-copy{min-width:0}
+.portrait{margin:0}
+.portrait img{width:100%; aspect-ratio:3/4; object-fit:cover; object-position:62% 30%; image-orientation:from-image; border-radius:14px; border:1px solid var(--line-2); box-shadow:0 26px 64px -30px rgba(0,0,0,.55); display:block}
+.kicker{font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--accent); margin:0 0 20px; display:flex; align-items:center; gap:10px}
 .kicker .ln{width:34px; height:1px; background:var(--accent); opacity:.6}
-.hero h1{font-family:var(--display); font-weight:800; font-size:clamp(54px,11vw,116px); line-height:.9; letter-spacing:-.035em; margin:0; color:var(--strong); text-wrap:balance}
-.hero .lead{font-family:var(--serif); font-size:clamp(19px,2.6vw,25px); line-height:1.45; color:var(--ink); max-width:20ch; margin:26px 0 0; text-wrap:pretty; opacity:.92}
+.hero h1{font-family:var(--display); font-weight:800; font-size:clamp(40px,6.6vw,68px); line-height:.94; letter-spacing:-.03em; margin:0; color:var(--strong); text-wrap:balance}
+.hero .lead{font-family:var(--serif); font-size:clamp(17px,2vw,20px); line-height:1.5; color:var(--ink); max-width:32ch; margin:22px 0 0; text-wrap:pretty; opacity:.92}
+@media (max-width:800px){
+  .hero-grid{grid-template-columns:1fr; gap:26px; justify-items:start}
+  .portrait{width:min(58%,206px); order:-1}
+}
 .hero .lead em{font-style:italic; color:var(--accent)}
 .hero .lead b{font-weight:500; font-style:italic; color:var(--ink)}
 .status{font-family:var(--mono); font-size:13px; color:var(--muted); margin:30px 0 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
@@ -172,20 +180,25 @@ footer .sig{color:var(--accent)}
 </header>
 
 <section class="hero">
-  <div class="wrap">
-    <p class="kicker"><span class="ln"></span> Research Engineer · Robot Learning</p>
-    <h1>Aditya<br>Gudal</h1>
-    <p class="lead">Teaching robots to <em>manipulate the physical world</em> — one demonstration, and its simulated twins, at a time.</p>
-    <p class="status"><span class="dot" aria-hidden="true"></span> New York · Nirvana Robotics · open to research collaborations</p>
-    <nav class="links" aria-label="Profiles">
-      <a href="mailto:adityagudal29@gmail.com">Email</a>
-      <a href="https://scholar.google.com/citations?user=bu34FNAAAAAJ">Scholar</a>
-      <a href="https://linkedin.com/in/aditya-gudal">LinkedIn</a>
-      <a href="https://github.com/aditya9729">GitHub</a>
-      <a href="https://huggingface.co/aditya9729">Hugging&nbsp;Face</a>
-      <a href="https://www.nokia.com/people/aditya-gudal/">Nokia</a>
-      <a class="cv" href="Aditya_Gudal_CV.pdf">CV ↓</a>
-    </nav>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker"><span class="ln"></span> Research Engineer · Robot Learning</p>
+      <h1>Aditya<br>Gudal</h1>
+      <p class="lead">Teaching robots to <em>manipulate the physical world</em> — one demonstration, and its simulated twins, at a time.</p>
+      <p class="status"><span class="dot" aria-hidden="true"></span> New York · Nirvana Robotics · open to research collaborations</p>
+      <nav class="links" aria-label="Profiles">
+        <a href="mailto:adityagudal29@gmail.com">Email</a>
+        <a href="https://scholar.google.com/citations?user=bu34FNAAAAAJ">Scholar</a>
+        <a href="https://linkedin.com/in/aditya-gudal">LinkedIn</a>
+        <a href="https://github.com/aditya9729">GitHub</a>
+        <a href="https://huggingface.co/aditya9729">Hugging&nbsp;Face</a>
+        <a href="https://www.nokia.com/people/aditya-gudal/">Nokia</a>
+        <a class="cv" href="Aditya_Gudal_CV.pdf">CV ↓</a>
+      </nav>
+    </div>
+    <figure class="portrait">
+      <img src="portrait.jpg" alt="Aditya Gudal holding his dog on a bluff above a river valley" width="900" height="1200" loading="eager">
+    </figure>
   </div>
 </section>
 
