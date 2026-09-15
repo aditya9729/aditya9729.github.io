@@ -1,422 +1,47 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aditya Gudal</title>
-<meta name="description" content="Aditya Gudal — research engineer in robot learning, real-to-sim and multi-agent systems. Building the data and post-training stack behind humanoid manipulation foundation models.">
-<meta property="og:title" content="Aditya Gudal">
-<meta property="og:description" content="Research engineer — robot learning, real-to-sim, multi-agent systems.">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400&display=swap">
-<style>
-:root{
-  --bg:#f2ede4; --surface:#fbf8f2; --ink:#211b13; --strong:#120d07;
-  --muted:#6b6255; --faint:#9a9184; --line:#e4ded2; --line-2:#d3ccbd;
-  --accent:#b7671b; --accent-2:#2f8f89;
-  --flow-warm:#c9781f; --flow-cool:#2f938d;
-  --scrim:86%;
-  --display:"Bricolage Grotesque","Archivo",system-ui,sans-serif;
-  --serif:"Newsreader",Georgia,"Times New Roman",serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --maxw:1000px;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#14110d; --surface:#1d1812; --ink:#ece4d8; --strong:#fbf6ee;
-    --muted:#a99d8c; --faint:#6f6558; --line:#2a251d; --line-2:#3a3228;
-    --accent:#f0a35a; --accent-2:#63c6bf;
-    --flow-warm:#f0a35a; --flow-cool:#63c6bf; --scrim:82%;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#14110d; --surface:#1d1812; --ink:#ece4d8; --strong:#fbf6ee;
-  --muted:#a99d8c; --faint:#6f6558; --line:#2a251d; --line-2:#3a3228;
-  --accent:#f0a35a; --accent-2:#63c6bf;
-  --flow-warm:#f0a35a; --flow-cool:#63c6bf; --scrim:82%;
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0; background:var(--bg); color:var(--ink);
-  font-family:var(--serif); font-size:18px; line-height:1.6;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-
-#flow{position:fixed; inset:0; width:100%; height:100%; z-index:0; display:block}
-.site{position:relative; z-index:1}
-.reading{background:color-mix(in srgb, var(--bg) var(--scrim), transparent)}
-
-.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(22px,5vw,48px)}
-
-a{color:inherit; text-decoration:none}
-
-/* top bar */
-.top{position:sticky; top:0; z-index:30; background:color-mix(in srgb,var(--bg) 72%, transparent); backdrop-filter:saturate(1.3) blur(12px); border-bottom:1px solid color-mix(in srgb,var(--line) 70%, transparent)}
-.top .wrap{display:flex; align-items:center; gap:20px; height:60px}
-.brand{font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:-.01em; color:var(--strong)}
-.brand .d{color:var(--accent)}
-.top nav{margin-left:auto; display:flex; gap:24px; font-family:var(--mono); font-size:12.5px}
-.top nav a{color:var(--muted)} .top nav a:hover{color:var(--ink)}
-.tg{font-family:var(--mono); font-size:11.5px; color:var(--muted); background:transparent; border:1px solid var(--line-2); border-radius:100px; padding:5px 11px; cursor:pointer; letter-spacing:.03em}
-.tg:hover{color:var(--strong); border-color:var(--accent)}
-@media (max-width:720px){.top nav{display:none}}
-
-/* hero */
-.hero{padding-block:clamp(48px,9vw,96px) clamp(44px,7vw,72px)}
-.hero-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(226px,286px); gap:clamp(30px,5vw,60px); align-items:center}
-.hero-copy{min-width:0}
-.portrait{margin:0}
-.portrait img{width:100%; aspect-ratio:3/4; object-fit:cover; object-position:62% 30%; image-orientation:from-image; border-radius:14px; border:1px solid var(--line-2); box-shadow:0 26px 64px -30px rgba(0,0,0,.55); display:block}
-.kicker{font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--accent); margin:0 0 20px; display:flex; align-items:center; gap:10px}
-.kicker .ln{width:34px; height:1px; background:var(--accent); opacity:.6}
-.hero h1{font-family:var(--display); font-weight:800; font-size:clamp(40px,6.6vw,68px); line-height:.94; letter-spacing:-.03em; margin:0; color:var(--strong); text-wrap:balance}
-.hero .lead{font-family:var(--serif); font-size:clamp(17px,2vw,20px); line-height:1.5; color:var(--ink); max-width:32ch; margin:22px 0 0; text-wrap:pretty; opacity:.92}
-@media (max-width:800px){
-  .hero-grid{grid-template-columns:1fr; gap:26px; justify-items:start}
-  .portrait{width:min(58%,206px); order:-1}
-}
-.hero .lead em{font-style:italic; color:var(--accent)}
-.hero .lead b{font-weight:500; font-style:italic; color:var(--ink)}
-.status{font-family:var(--mono); font-size:13px; color:var(--muted); margin:30px 0 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
-.dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 0 var(--accent); animation:pulse 2.8s ease-out infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 50%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
-@media (prefers-reduced-motion: reduce){.dot{animation:none}}
-.links{display:flex; flex-wrap:wrap; align-items:center; gap:4px 22px; margin:34px 0 0; font-family:var(--mono); font-size:13px}
-.links a{color:var(--muted); padding:5px 0; border-bottom:1.5px solid transparent}
-.links a:hover{color:var(--strong); border-bottom-color:var(--accent)}
-.links a.cv{color:var(--strong); border:1px solid var(--accent); border-radius:100px; padding:7px 15px}
-.links a.cv:hover{background:var(--accent); color:var(--bg)}
-
-/* section scaffold */
-section.block{padding-block:clamp(52px,8vw,84px); border-top:1px solid var(--line)}
-.sec-h{margin:0 0 34px}
-.sec-h h2{font-family:var(--display); font-weight:700; font-size:clamp(24px,3.4vw,34px); letter-spacing:-.025em; color:var(--strong); margin:0; display:inline-block}
-.sec-h .bar{display:block; width:44px; height:3px; background:var(--accent); margin-top:12px; border-radius:2px}
-
-.prose{max-width:60ch; font-size:19.5px; line-height:1.62; color:var(--ink)}
-.prose p{margin:0 0 18px} .prose p:last-child{margin-bottom:0}
-.prose b{font-weight:500; font-style:italic}
-.prose a{color:var(--ink); text-decoration:underline; text-decoration-color:var(--accent); text-underline-offset:3px; text-decoration-thickness:1.5px}
-
-/* entries: mono meta rail + serif content */
-.entry{display:grid; grid-template-columns:180px 1fr; gap:6px 36px; padding-block:26px; border-top:1px solid var(--line)}
-.entry:first-of-type{border-top:0; padding-top:2px}
-.entry .when{font-family:var(--mono); font-size:12.5px; color:var(--muted); line-height:1.6; padding-top:8px}
-.entry .when .loc{color:var(--faint); display:block; margin-top:3px}
-.entry h3{margin:0; font-family:var(--display); font-weight:600; font-size:21px; letter-spacing:-.015em; color:var(--strong); line-height:1.2}
-.entry h3 .org{color:var(--accent)}
-.entry p{margin:9px 0 0; color:var(--muted); font-size:16.5px; line-height:1.55; max-width:58ch}
-.terms{font-family:var(--mono); font-size:11.5px; color:var(--faint); margin:13px 0 0; letter-spacing:.01em}
-.terms span::after{content:" · "; color:var(--line-2)}
-.terms span:last-child::after{content:""}
-
-/* publications */
-.pub{display:grid; grid-template-columns:180px 1fr; gap:6px 36px; padding-block:24px; border-top:1px solid var(--line)}
-.pub:first-of-type{border-top:0; padding-top:2px}
-.pub .venue{font-family:var(--mono); font-size:12.5px; color:var(--muted); padding-top:6px}
-.pub .venue .yr{color:var(--faint); display:block; margin-top:3px}
-.pub h3{margin:0; font-family:var(--display); font-weight:600; font-size:19px; line-height:1.32; color:var(--strong); letter-spacing:-.01em}
-.pub .authors{margin:9px 0 0; font-size:15.5px; color:var(--muted)} .pub .authors b{color:var(--ink); font-weight:500; font-style:italic}
-.idlink{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:100px; padding:1px 8px; margin-left:7px; white-space:nowrap; vertical-align:middle}
-.idlink:hover{background:var(--accent); color:var(--bg)}
-
-/* patents */
-.pat{display:grid; grid-template-columns:180px 1fr; gap:6px 36px; padding-block:20px; border-top:1px solid var(--line)}
-.pat:first-of-type{border-top:0; padding-top:2px}
-.pat .no{font-family:var(--mono); font-size:12.5px; color:var(--accent); padding-top:3px; line-height:1.6}
-.pat .no a:hover{text-decoration:underline; text-underline-offset:2px}
-.pat .no .pend{color:var(--faint)}
-.pat p{margin:0; color:var(--ink); font-size:16.5px; line-height:1.5}
-
-/* recognition */
-.rec{list-style:none; padding:0; margin:0}
-.rec li{display:grid; grid-template-columns:20px 1fr; gap:16px; padding-block:16px; border-top:1px solid var(--line); font-size:17px; color:var(--ink); align-items:start}
-.rec li:first-child{border-top:0; padding-top:2px}
-.rec li .mk{color:var(--accent); font-size:14px; padding-top:5px; font-family:var(--mono)}
-
-/* education */
-.edu{display:grid; grid-template-columns:1fr 1fr; gap:30px 36px}
-.edu .card{padding-top:22px; border-top:1px solid var(--line)}
-.edu .when{font-family:var(--mono); font-size:12.5px; color:var(--muted); margin:0 0 8px}
-.edu h3{margin:0; font-family:var(--display); font-weight:600; font-size:21px; letter-spacing:-.015em; color:var(--strong)}
-.edu p{margin:6px 0 0; color:var(--muted); font-size:16.5px}
-
-footer{padding-block:44px 64px; border-top:1px solid var(--line)}
-footer .wrap{display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; font-family:var(--mono); font-size:12.5px; color:var(--faint)}
-footer a{color:var(--muted)} footer a:hover{color:var(--ink)}
-footer .sig{color:var(--accent)}
-
-:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
-
-@media (max-width:640px){
-  .entry,.pub,.pat{grid-template-columns:1fr; gap:5px}
-  .entry .when,.pub .venue,.pat .no{padding-top:0}
-  .entry .when .loc,.pub .venue .yr{display:inline}
-  .entry .when .loc::before,.pub .venue .yr::before{content:" · "; color:var(--line-2)}
-  .edu{grid-template-columns:1fr; gap:0}
-  .hero .lead{max-width:30ch}
-}
-</style>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+ <meta name="theme-color" content="#0b1021">
+ <title>Aditya's Lab — Worlds within worlds</title>
+ <meta name="description" content="Explore Aditya Gudal's research as a playable pixel-art world: robot learning, world models, multi-agent systems, decentralized infrastructure and geometry.">
+ <meta property="og:title" content="Aditya's Lab — Worlds within worlds"><meta property="og:description" content="Five worlds. Twenty-two experiments. One curious engineer."><meta property="og:type" content="website"><meta property="og:image" content="https://aditya9729.github.io/assets/social.png">
+ <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+ <script defer src="js/data.js"></script><script defer src="js/art.js"></script><script defer src="js/intent.js"></script><script defer src="js/games.js"></script><script defer src="js/app.js"></script>
 </head>
 <body>
-<canvas id="flow" aria-hidden="true"></canvas>
-<div class="site">
-
-<header class="top">
-  <div class="wrap">
-    <span class="brand">Aditya Gudal<span class="d">.</span></span>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#publications">Papers</a>
-      <a href="#patents">Patents</a>
-      <a href="#education">Education</a>
-    </nav>
-    <button class="tg" id="theme" type="button" aria-label="Toggle color theme">◑ theme</button>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="kicker"><span class="ln"></span> Research Engineer · Robot Learning</p>
-      <h1>Aditya<br>Gudal</h1>
-      <p class="lead">Teaching robots to <em>manipulate the physical world</em> — one demonstration, and its simulated twins, at a time.</p>
-      <p class="status"><span class="dot" aria-hidden="true"></span> New York · Nirvana Robotics · open to research collaborations</p>
-      <nav class="links" aria-label="Profiles">
-        <a href="mailto:adityagudal29@gmail.com">Email</a>
-        <a href="https://scholar.google.com/citations?user=bu34FNAAAAAJ">Scholar</a>
-        <a href="https://linkedin.com/in/aditya-gudal">LinkedIn</a>
-        <a href="https://github.com/aditya9729">GitHub</a>
-        <a href="https://huggingface.co/aditya9729">Hugging&nbsp;Face</a>
-        <a href="https://www.nokia.com/people/aditya-gudal/">Nokia</a>
-        <a class="cv" href="Aditya_Gudal_CV.pdf">CV ↓</a>
-      </nav>
-    </div>
-    <figure class="portrait">
-      <img src="portrait.jpg" alt="Aditya Gudal holding his dog on a bluff above a river valley" width="900" height="1200" loading="eager">
-    </figure>
-  </div>
-</section>
-
-<div class="reading">
-<main>
-<section class="block" id="about">
-  <div class="wrap">
-    <div class="sec-h"><h2>About</h2><span class="bar"></span></div>
-    <div class="prose">
-      <p>I am a Member of Technical Staff at <a href="https://nrvna.ai">Nirvana Robotics</a> in New York, building the data and post-training stack behind a humanoid manipulation foundation model: handheld (UMI) demonstration collection, real-to-sim reconstruction of rigid, deformable and articulated objects, real-to-real data augmentation, scene-graph navigation, and RL post-training of flow-matching policies.</p>
-      <p>Before Nirvana I was a Senior Research Engineer at <b>Mbodi AI</b> — perception and manipulation for industrial pick-and-place, reaching 99.6% on a Fortune 100 benchmark (TechCrunch Disrupt 2025 Battlefield Top 20; Automate 2026 Startup Challenge winner) — and a Research Engineer at <b>Nokia Bell Labs</b>, where I worked on decentralized AI infrastructure, federated learning and production multi-agent systems, with three published patent families and a peer-reviewed OFC 2026 paper.</p>
-      <p>I hold an M.S. in Machine Learning &amp; Data Science from Northwestern University and a B.E. in Electronics Engineering from the University of Mumbai.</p>
-    </div>
-  </div>
-</section>
-
-<section class="block" id="work">
-  <div class="wrap">
-    <div class="sec-h"><h2>Work</h2><span class="bar"></span></div>
-
-    <article class="entry">
-      <div class="when">May 2026 — present<span class="loc">New York</span></div>
-      <div>
-        <h3>Member of Technical Staff, <span class="org">Nirvana Robotics</span></h3>
-        <p>Humanoid data pipeline (UMI, real2sim, real2real), pretraining architecture, scene-graph navigation and RL post-training. Second author on a forthcoming deformable-object manipulation benchmark with Georgia Tech.</p>
-        <p class="terms"><span>real2sim</span><span>flow-matching policies</span><span>MCAP data pipeline</span><span>RL post-training</span></p>
-      </div>
-    </article>
-
-    <article class="entry">
-      <div class="when">Sep 2025 — Jun 2026<span class="loc">USA</span></div>
-      <div>
-        <h3>Senior Research Engineer, <span class="org">Mbodi AI</span></h3>
-        <p>3D reconstruction, multi-view tracking and object permanence for pick-and-place; an LLM-agent control pipeline for OEM robots; open-sourced a typed robotics data library.</p>
-        <p class="terms"><span>3D reconstruction</span><span>multi-view tracking</span><span>LLM agents</span></p>
-      </div>
-    </article>
-
-    <article class="entry">
-      <div class="when">Apr 2023 — Sep 2025<span class="loc">Germany &amp; USA</span></div>
-      <div>
-        <h3>Research Engineer, <span class="org">Nokia Bell Labs</span></h3>
-        <p>Decentralized energy trading (federated transformers, SSI/HSM certification, LLM-generated smart contracts); the OurAI decentralized GPU marketplace; the Ambion post-training platform (spun out); WhizKid multi-agent systems and failure detection; EU Horizon and U.S. government-funded distributed VLM training.</p>
-        <p class="terms"><span>federated learning</span><span>multi-agent systems</span><span>DePIN</span><span>distributed VLM training</span></p>
-      </div>
-    </article>
-
-    <article class="entry">
-      <div class="when">Feb 2021 — Feb 2023<span class="loc">Naperville, IL</span></div>
-      <div>
-        <h3>Data Scientist, <span class="org">Nokia</span></h3>
-        <p>Built the first ML service and MLOps pipeline inside a flagship telecom product; statistical and RL models for UE trajectory tracking, overload control and paging fan-out.</p>
-        <p class="terms"><span>MLOps</span><span>reinforcement learning</span><span>telecom</span></p>
-      </div>
-    </article>
-
-    <article class="entry">
-      <div class="when">2018 — 2019<span class="loc">Kochi, India</span></div>
-      <div>
-        <h3>Consultant, <span class="org">KRIBS-BioNest</span> — RGCB / Kerala Startup Mission</h3>
-        <p>Genomics data science at a Government of India–established biotech incubator.</p>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="block" id="publications">
-  <div class="wrap">
-    <div class="sec-h"><h2>Papers</h2><span class="bar"></span></div>
-
-    <article class="pub">
-      <div class="venue">OFC 2026<span class="yr">paper M3Z.15 · peer-reviewed</span></div>
-      <div>
-        <h3>AI Agent-Driven Network-Aware Decentralized Compute Resource Brokering <a class="idlink" href="https://doi.org/10.1364/OFC.2026.M3Z.15">DOI</a></h3>
-        <p class="authors">S. Bidkar, <b>A. Gudal</b>, L. Drabeck, J. Simsarian, B. Theeten, M. Khan · Optical Fiber Communication Conference</p>
-      </div>
-    </article>
-
-    <article class="pub">
-      <div class="venue">Preprint<span class="yr">2026</span></div>
-      <div>
-        <h3>CSR-RAG: An Efficient Retrieval System for Text-to-SQL at Enterprise Scale <a class="idlink" href="https://arxiv.org/abs/2601.06564">arXiv</a></h3>
-        <p class="authors">arXiv:2601.06564</p>
-      </div>
-    </article>
-
-    <article class="pub">
-      <div class="venue">Preprint<span class="yr">2025</span></div>
-      <div>
-        <h3>A Ranking Framework for Network Resource Allocation and Scheduling via Hypergraphs <a class="idlink" href="https://arxiv.org/abs/2506.01571">arXiv</a></h3>
-        <p class="authors">R. Singh, N. Boškov, <b>A. Gudal</b>, M. Khan · arXiv:2506.01571</p>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="block" id="patents">
-  <div class="wrap">
-    <div class="sec-h"><h2>Patents</h2><span class="bar"></span></div>
-
-    <div class="pat">
-      <div class="no"><a href="https://patents.google.com/patent/US20260093548A1">US 2026/0093548 A1</a></div>
-      <p>Resource-provider identity management, DePIN attestation and provisioning.</p>
-    </div>
-    <div class="pat">
-      <div class="no"><a href="https://patents.google.com/patent/US20260093221A1">US 2026/0093221 A1</a> · EP 4723022 A1</div>
-      <p>Renewable household energy management with federated machine learning.</p>
-    </div>
-    <div class="pat">
-      <div class="no"><a href="https://patents.google.com/patent/US20260057398A1">US 2026/0057398 A1</a> · EP 4701134 A1</div>
-      <p>Cryptographic renewable-energy verification for EV charging and the grid.</p>
-    </div>
-    <div class="pat">
-      <div class="no"><span class="pend">Pending</span></div>
-      <p>GB 2520808.3 — anomaly detection as a service for multi-agent AI systems; NC337331-IN-NP — agentic monitoring and control of an industrial network.</p>
-    </div>
-  </div>
-</section>
-
-<section class="block" id="recognition">
-  <div class="wrap">
-    <div class="sec-h"><h2>Recognition</h2><span class="bar"></span></div>
-    <ul class="rec">
-      <li><span class="mk">◆</span><span>TechCrunch Disrupt 2025 Startup Battlefield — Top 20 (Mbodi AI team)</span></li>
-      <li><span class="mk">◆</span><span>Automate 2026 Startup Challenge — winner (Mbodi AI team)</span></li>
-      <li><span class="mk">◆</span><span>Nokia Bell Labs Entrepreneur-in-Residence projects: Ambion (spun out, seed-funded) and RADMA</span></li>
-      <li><span class="mk">◆</span><span>Seven invention disclosures at Nokia Bell Labs — three published as U.S./EU patent applications</span></li>
-    </ul>
-  </div>
-</section>
-
-<section class="block" id="education">
-  <div class="wrap">
-    <div class="sec-h"><h2>Education</h2><span class="bar"></span></div>
-    <div class="edu">
-      <div class="card">
-        <p class="when">2019 — 2020</p>
-        <h3>Northwestern University</h3>
-        <p>M.S. Machine Learning &amp; Data Science · GPA 3.9 / 4.0</p>
-      </div>
-      <div class="card">
-        <p class="when">2015 — 2019</p>
-        <h3>University of Mumbai · VESIT</h3>
-        <p>B.E. Electronics Engineering · GPA 4.0 / 4.0</p>
-      </div>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <span class="sig">◆</span>
-    <span>© 2026 Aditya Gudal</span>
-    <span>·</span>
-    <a href="mailto:adityagudal29@gmail.com">adityagudal29@gmail.com</a>
-    <span>·</span>
-    <span>New York</span>
-  </div>
-</footer>
-</div><!-- /reading -->
-</div><!-- /site -->
-
-<script>
-/* ---------- theme toggle (persisted) ---------- */
-var root=document.documentElement;
-(function(){
-  var btn=document.getElementById('theme');
-  try{var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
-  btn.addEventListener('click',function(){
-    var cur=root.getAttribute('data-theme');
-    var sysDark=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;
-    var next=cur?(cur==='dark'?'light':'dark'):(sysDark?'light':'dark');
-    root.setAttribute('data-theme',next);
-    try{localStorage.setItem('theme',next);}catch(e){}
-    if(window.__flowReset) window.__flowReset();
-  });
-})();
-
-/* ---------- flow field: particles advected along an animated vector field ---------- */
-(function(){
-  var c=document.getElementById('flow'); if(!c) return;
-  var ctx=c.getContext('2d'), DPR=Math.min(window.devicePixelRatio||1,2);
-  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var W,H,parts,t=0,raf,warm,cool,bg;
-  function tok(n){return getComputedStyle(root).getPropertyValue(n).trim();}
-  function readColors(){warm=hexRGB(tok('--flow-warm'));cool=hexRGB(tok('--flow-cool'));bg=hexRGB(tok('--bg'));}
-  function hexRGB(h){h=(h||'').replace('#','');if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
-    return [parseInt(h.substr(0,2),16)||20,parseInt(h.substr(2,2),16)||17,parseInt(h.substr(4,2),16)||13];}
-  function rgba(c,a){return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')';}
-  function spawn(){return {x:Math.random()*W,y:Math.random()*H,life:40+Math.random()*220|0,warm:Math.random()<.5};}
-  function field(x,y){var s=0.0016;
-    return Math.PI*(Math.sin(x*s+t*0.15)+Math.cos(y*s*1.28-t*0.11)+0.6*Math.sin((x+y)*s*0.7+t*0.08));}
-  function resize(){
-    W=window.innerWidth; H=window.innerHeight;
-    c.width=W*DPR; c.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-    var n=Math.round(Math.min(820, W*H/2900));
-    parts=[]; for(var i=0;i<n;i++) parts.push(spawn());
-    ctx.fillStyle=rgba(bg,1); ctx.fillRect(0,0,W,H);
-  }
-  function draw(){
-    ctx.fillStyle=rgba(bg,0.052); ctx.fillRect(0,0,W,H);
-    for(var i=0;i<parts.length;i++){
-      var p=parts[i], a=field(p.x,p.y), nx=p.x+Math.cos(a)*1.15, ny=p.y+Math.sin(a)*1.15;
-      ctx.strokeStyle=rgba(p.warm?warm:cool, 0.17);
-      ctx.lineWidth=1.1; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(nx,ny); ctx.stroke();
-      p.x=nx; p.y=ny; p.life--;
-      if(p.life<0||p.x<-4||p.x>W+4||p.y<-4||p.y>H+4){parts[i]=spawn();}
-    }
-    t+=1;
-  }
-  function loop(){draw(); raf=requestAnimationFrame(loop);}
-  window.__flowReset=function(){readColors(); ctx.fillStyle=rgba(bg,1); ctx.fillRect(0,0,W,H);};
-  readColors(); resize();
-  if(reduce){for(var k=0;k<90;k++) draw();}
-  else loop();
-  window.addEventListener('resize',function(){cancelAnimationFrame(raf); readColors(); resize(); if(!reduce) loop();});
-})();
-</script>
-</body>
-</html>
+ <a class="skip" href="notebook.html">Skip the game · read portfolio</a>
+ <main id="app" aria-label="Aditya's playable research portfolio">
+  <canvas id="world" aria-hidden="true"></canvas><div class="vignette" aria-hidden="true"></div><div class="scanlines" aria-hidden="true"></div>
+  <header class="topbar">
+   <button class="brand" id="home" aria-label="Aditya's Lab, return to city"><span class="badge">AG</span><span><b>Aditya's Lab</b><small id="location">WORLDS WITHIN WORLDS</small></span></button>
+   <nav aria-label="Main"><button id="mapButton" title="World map (M)"><span aria-hidden="true">⌘</span> <span>Map</span></button><a class="nav-link" href="notebook.html">Notebook <span aria-hidden="true">↗</span></a><button id="soundButton" aria-label="Enable sound" aria-pressed="false" title="Sound off">♪<span class="off-dot"></span></button><button id="settingsButton" aria-label="Settings and controls" title="Settings">⚙</button></nav>
+  </header>
+  <section id="hubUI">
+   <div class="hero"><p class="overline">ADITYA GUDAL / RESEARCH ENGINEER</p><h1>Worlds<br>within <em>worlds.</em></h1><p class="subline">I build models. And the worlds they learn from.</p><button id="exploreButton" class="primary">Pick a portal <span>↘</span></button></div>
+   <div id="hubPortals" aria-label="Enter a research world"></div>
+   <div class="hub-caption"><span class="live-dot"></span><span id="hubHint">Walk, wander, pet the dog. Everything is open.</span></div>
+  </section>
+  <section id="worldUI" hidden>
+   <div class="world-title"><button id="backCity" class="back">← CITY</button><p id="worldOrg" class="overline"></p><h1 id="worldTitle"></h1><span id="worldCount" class="count"></span></div>
+   <div class="experiment-shell" id="experimentShell">
+    <header class="experiment-heading"><div><span id="experimentIndex" class="overline"></span><h2 id="experimentName"></h2></div><button id="aboutExperiment" aria-label="Read about this experiment" title="Research note">?</button></header>
+    <p id="objective" class="objective"></p>
+    <div class="game-stage" id="gameStage"><canvas id="experiment" aria-label="Interactive research experiment"></canvas><div id="targets" aria-label="Experiment controls"></div></div>
+    <div id="gameActions" class="game-actions"></div>
+    <div class="experiment-foot"><span id="feedback" role="status" aria-live="polite">Try it. There is no wrong turn.</span><button id="resetGame" aria-label="Restart current experiment" title="Restart experiment">↺</button></div>
+   </div>
+   <nav class="concept-nav" aria-label="Experiments in this world"><button id="prevGame" aria-label="Previous experiment">←</button><div id="concepts"></div><button id="nextGame" aria-label="Next experiment">→</button></nav>
+   <div class="model-disclaimer">PLAYABLE RESEARCH SKETCHES · SYNTHETIC, NOT BENCHMARKS</div>
+  </section>
+  <footer class="bottom-bar"><div class="desktop-controls"><kbd>A</kbd><kbd>D</kbd> walk <kbd>SPACE</kbd> hop <kbd>E</kbd> enter <kbd>M</kbd> map</div><button id="passportButton" class="passport" aria-label="Open world map and progress"><span aria-hidden="true">✦</span> <b id="progress">0 / 22</b> discoveries</button><a href="mailto:adityagudal29@gmail.com">Say hello ↗</a></footer>
+  <div id="touchControls" class="touch-controls" aria-label="Movement controls"><div><button data-move="-1" aria-label="Walk left">◀</button><button data-move="1" aria-label="Walk right">▶</button></div><div><button id="hopButton" aria-label="Jump">↑</button><button id="enterButton" class="enter-control" aria-label="Enter nearest portal">A</button></div></div>
+  <button id="petButton" aria-label="Pet your dog companion" title="Pet the dog" tabindex="0">♥</button>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <div id="transition" aria-hidden="true"></div>
+ </main>
+ <dialog id="atlas" aria-labelledby="atlasTitle"><div class="dialog-head"><div><p class="overline">FAST TRAVEL / NO LEVEL GATES</p><h2 id="atlasTitle">Choose your world.</h2></div><button data-close aria-label="Close world map">×</button></div><div id="atlasCards"></div><div class="atlas-footer"><span id="atlasProgress">Your passport is saved on this device.</span><button id="cityFromMap">Back to the city →</button></div></dialog>
+ <dialog id="note" aria-labelledby="noteTitle"><div class="dialog-head"><div><p class="overline" id="noteOrg"></p><h2 id="noteTitle">Behind the experiment</h2></div><button data-close aria-label="Close research note">×</button></div><p id="noteText"></p><a href="notebook.html">The complete research notebook ↗</a></dialog>
+ <dialog id="settings" aria-labelledby="settingsTitle"><div class="dialog-head"><div><p class="overline">MAKE YOURSELF AT HOME</p><h2 id="settingsTitle">Your controls.</h2></div><button data-close aria-label="Close settings">×</button></div><p>Walk with A / D or arrow keys. Space to hop; E to enter a nearby portal. M opens the map. Inside experiments, use the controls or tap glowing objects. All rooms are open from the start.</p><label class="setting"><input type="checkbox" id="reduceMotion"> Gentle mode · less ambient motion</label><label class="setting"><input type="checkbox" id="crt"> CRT scanlines</label><p class="small">Sound starts off. Progress stays in this browser; nothing is sent to a server. Touch controls appear on phones and tablets.</p><button id="resetProgress" class="danger">Reset passport…</button><a href="notebook.html">Prefer a regular portfolio? →</a></dialog>
+ <noscript><div class="no-script"><h1>Aditya's Lab</h1><p>The game needs JavaScript. The complete portfolio does not.</p><a href="notebook.html">Read the research notebook →</a></div></noscript>
+</body></html>
