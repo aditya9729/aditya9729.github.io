@@ -1,0 +1,27 @@
+{
+  "runtime": "Linux Python3.12 CPU; in-process IPython; actual MuJoCo stepping",
+  "separate_jupyter_kernel": "Host socket restrictions blocked kernel launch",
+  "notebooks": {
+    "00_probability.ipynb": 5,
+    "01_mdp.ipynb": 5,
+    "02_bellman.ipynb": 5,
+    "03_td.ipynb": 6,
+    "04_dqn.ipynb": 6,
+    "05_reinforce.ipynb": 6,
+    "06_actor_critic.ipynb": 6,
+    "07_ppo.ipynb": 6,
+    "08_ddpg.ipynb": 4,
+    "09_td3.ipynb": 5,
+    "10_sac.ipynb": 7,
+    "11_offline.ipynb": 5,
+    "12_franka.ipynb": 5,
+    "13_agilex.ipynb": 5,
+    "14_r1_pro.ipynb": 5,
+    "15_grpo_flow.ipynb": 6,
+    "16_curricula_rewards.ipynb": 5,
+    "17_systems_capstone.ipynb": 4
+  },
+  "total_code_cells": 96,
+  "mac_native_executed": false,
+  "colab_cuda_executed": false
+}

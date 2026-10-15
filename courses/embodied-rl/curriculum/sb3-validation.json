@@ -1,0 +1,77 @@
+{
+  "runtime": "Linux CPU",
+  "runs": [
+    {
+      "algorithm": "PPO",
+      "environment": "Reacher-v5",
+      "requested_transitions": 256,
+      "actual_transitions": 256,
+      "seed": 7,
+      "eval_seed_start": 10007,
+      "evaluation_returns": [
+        -11.439785490053612,
+        -1.911940850728806
+      ],
+      "task_success": null,
+      "seconds": 1.2533142709999083,
+      "device": "cpu",
+      "sb3_version": "2.9.0",
+      "torch_version": "2.11.0+cpu",
+      "network": [
+        64,
+        64
+      ],
+      "scope": "Baseline execution; a short run is not convergence"
+    },
+    {
+      "algorithm": "SAC",
+      "environment": "Reacher-v5",
+      "requested_transitions": 192,
+      "actual_transitions": 192,
+      "seed": 7,
+      "eval_seed_start": 10007,
+      "evaluation_returns": [
+        -10.636946571270007,
+        -9.006033947334421
+      ],
+      "task_success": null,
+      "seconds": 0.6153014680003253,
+      "device": "cpu",
+      "sb3_version": "2.9.0",
+      "torch_version": "2.11.0+cpu",
+      "network": [
+        64,
+        64
+      ],
+      "scope": "Baseline execution; a short run is not convergence"
+    },
+    {
+      "algorithm": "SAC",
+      "environment": "franka",
+      "requested_transitions": 192,
+      "actual_transitions": 192,
+      "seed": 7,
+      "eval_seed_start": 10007,
+      "evaluation_returns": [
+        -0.26041292338233485,
+        -0.14456801461167681
+      ],
+      "task_success": [
+        true,
+        true
+      ],
+      "seconds": 1.0061134869993111,
+      "device": "cpu",
+      "sb3_version": "2.9.0",
+      "torch_version": "2.11.0+cpu",
+      "network": [
+        64,
+        64
+      ],
+      "scope": "Baseline execution; a short run is not convergence"
+    }
+  ],
+  "scope": "Finite training and evaluation integration checks; no convergence comparison",
+  "mac_native_executed": false,
+  "colab_cuda_executed": false
+}

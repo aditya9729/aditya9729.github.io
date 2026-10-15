@@ -1,0 +1,2 @@
+# Library reference track, separately installable from the original implementation.
+stable-baselines3==2.9.0
