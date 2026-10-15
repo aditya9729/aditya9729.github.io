@@ -10,8 +10,10 @@ def main():
     p.add_argument('--skip-smoke',action='store_true');a=p.parse_args()
     root=Path(__file__).resolve().parents[1];venv=(root/a.venv).resolve()
     exe=venv/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
-    commands=[[a.python,'-m','venv',str(venv)],[str(exe),'-m','pip','install','--upgrade','pip'],
-              [str(exe),'-m','pip','install','-r',str(root/'requirements.txt')]]
+    commands=[[a.python,'-m','venv',str(venv)],[str(exe),'-m','pip','install','--upgrade','pip']]
+    if sys.platform.startswith('linux'):
+        commands.append([str(exe),'-m','pip','install','torch==2.11.0','--index-url','https://download.pytorch.org/whl/cpu'])
+    commands.append([str(exe),'-m','pip','install','-r',str(root/'requirements.txt')])
     if a.profile=='sb3':commands.append([str(exe),'-m','pip','install','-r',str(root/'requirements-sb3.txt')])
     if not a.skip_smoke:commands.append([str(exe),str(root/'scripts'/'doctor.py'),'--profile',a.profile])
     for command in commands:

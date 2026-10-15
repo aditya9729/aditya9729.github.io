@@ -182,8 +182,15 @@
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('course-navigation').classList.remove('open');$('menu-toggle').setAttribute('aria-expanded','false');}});
  document.querySelectorAll('[data-runtime]').forEach(b=>b.addEventListener('click',()=>runtime(b.dataset.runtime)));
  document.querySelectorAll('[data-jump]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();select(lessons.findIndex(l=>l.slug===a.dataset.jump),true);}));
- window.addEventListener('hashchange',()=>{const i=lessons.findIndex(l=>l.slug===location.hash.slice(1));if(i>=0&&i!==index)select(i,true);});
+ document.querySelectorAll('.chapter-toc a,.cover-start').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();const section=a.getAttribute('href').slice(1),target=$(section);if(!target)return;
+  history.replaceState(null,'','#'+lessons[index].slug+'/'+section);
+  target.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+ }));
+ window.addEventListener('hashchange',()=>{const i=lessons.findIndex(l=>l.slug===location.hash.slice(1).split('/')[0]);if(i>=0&&i!==index)select(i,true);});
  const evidence=window.COURSE_EVIDENCE||{};
  $('evidence-content').innerHTML=`<p><strong>${lessons.length} long-form chapters</strong> with ${lessons.reduce((s,l)=>s+l.word_count,0).toLocaleString()} words of notes, worked examples, original mathematical sketches, and 18 companion notebooks.</p><p><strong>${evidence.total_code_cells??'See execution report'} default code cells executed on Linux CPU.</strong> The tests include actual Gymnasium transitions, original optimizer updates, and vendor-geometry MuJoCo robot tasks. Small runs verify implementation; they are not research-grade performance comparisons.</p><p>Original code covers returns, Bellman backups, DQN updates, REINFORCE, AC/GAE, PPO, TD3, and SAC. DDPG is a derivation bridge. Research mechanisms are labeled separately from complete paper reproductions. Browser layout QA was unavailable.</p><a href="curriculum/execution.json" download>Notebook execution report ↗</a>`;
- runtime(['mac','colab','sb3','lerobot','rlinf'].includes(state.runtime)?state.runtime:'mac');const initial=lessons.findIndex(l=>l.slug===location.hash.slice(1));select(initial>=0?initial:0);
+ runtime(['mac','colab','sb3','lerobot','rlinf'].includes(state.runtime)?state.runtime:'mac');
+ const [initialSlug,initialSection]=location.hash.slice(1).split('/'),initial=lessons.findIndex(l=>l.slug===initialSlug);select(initial>=0?initial:0);
+ if(initial>=0&&initialSection&&$(initialSection)){history.replaceState(null,'','#'+initialSlug+'/'+initialSection);$(initialSection).scrollIntoView({block:'start'});}
 })();

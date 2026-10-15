@@ -22,7 +22,10 @@ an actual Reacher environment, constructs an SB3 SAC model, and writes the exact
 resolved dependency list to `.venv/course-freeze.txt`. Use `--profile core` to omit
 SB3. Existing environments are reused; choose another `--venv` path for a clean one.
 The dependency ranges allow supported architecture wheels; the freeze file records
-your actual installation. This is not a claim that every platform resolves identically.
+your actual installation. On Linux the installer explicitly selects the CPU Torch
+wheel index before the other requirements, avoiding an accidental CUDA dependency
+download. On macOS it uses native wheels. This is not a claim that every platform
+resolves identically.
 
 Manual equivalent:
 

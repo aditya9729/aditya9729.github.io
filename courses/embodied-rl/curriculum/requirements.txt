@@ -1,6 +1,6 @@
 # Compact, CPU-capable learning path. Linux CPU executed; Mac/Colab setup provided.
 # Keep Colab's preinstalled Torch when using its CUDA runtime.
-torch>=2.2,<3
+torch>=2.8,<2.12
 numpy>=1.26,<2
 gymnasium[mujoco]==1.4.0
 mujoco==3.3.7
